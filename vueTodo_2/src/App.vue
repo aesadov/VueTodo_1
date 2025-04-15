@@ -1,47 +1,66 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+  import {ref} from 'vue'
+  import AddNewTask from './components/AddNewTask.vue';
+
+  const tasks = ref([
+    {id: 1, text: 'to study react', isDone: true},
+    {id: 2, text: 'to study reacNative', isDone: false},
+    {id: 3, text: 'to study Vue', isDone: false}
+  ])
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="screenContainer">
+    <div class="appContainer">
+      <AddNewTask/>
+      <div class="tasks">Tasks</div>
+      <div class="doneTasks">done tasks</div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
+<style lang="scss" scoped>
+  .screenContainer {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #0d0714;
+    color: #f0f8ff;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
+  .appContainer {
+    width: 432px;
     display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center; 
   }
-}
+  .input {
+    background-color: #0d0714;
+    border: 1px solid #3E1671;
+    border-radius: 10px;
+    width: 351px;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 16px;
+  }
+  .button {
+    width: 40px;
+    height: 40px;
+    background-color: #9E78CF;
+    border-radius: 10px;
+    margin-left: 10px;
+    border-style: none;
+    color: #f0f8ff;
+    font-size: x-large;
+    cursor: pointer;
+
+    &:hover {
+      color: #000000;
+      background-color: #aca2a5;
+    }
+  }
+  .addNewTask {
+    display: flex;
+    align-items: center;
+  }
 </style>
