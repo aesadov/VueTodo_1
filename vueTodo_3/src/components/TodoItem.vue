@@ -1,13 +1,12 @@
 <script setup>
-import CheckIcon from '@assets/icons/check.svg?component'
 </script>
 
 <template>
   <div class="itemContainer">
     <p>task to do</p>
     <div class="itemButtons">
-      <CheckIcon class="checkIcon"/>
-      <p>del</p>
+        <p>v</p>
+        <p>del</p>
     </div>
   </div>
 </template>
