@@ -1,18 +1,36 @@
 <script setup>
+import { ref } from 'vue';
+import PlusIcon from '../assets/icons/plus.svg'
+
+const emit = defineEmits(['addNewTask'])
+
+function submitForm(){
+  emit('addNewTask', newTodoText.value)
+  newTodoText.value = ''
+}
+
+const newTodoText = ref('')
 </script>
 
 <template>
-  <div class="addNewTask">
-    <input 
-      class="input" 
-      type="text" 
-      placeholder="Add a new task"
-    >
-    <button class="button">+</button>
-  </div>
+    <form @submit.prevent="submitForm" class="addNewTask">
+      <input 
+        class="input" 
+        type="text" 
+        id="newTodo"
+        placeholder="Add a new task"
+        v-model="newTodoText"
+      >
+      <button class="button"><PlusIcon class="plusIcon"/></button>
+    </form>
 </template>
 
 <style scoped lang="scss">
+.addNewTask {
+  display: flex;
+  align-items: center;
+}
+
 .input {
   background-color: #0d0714;
   border: 1px solid #3E1671;
@@ -31,8 +49,6 @@
   border-radius: 10px;
   margin-left: 10px;
   border: none;
-  color: #f0f8ff;
-  font-size: x-large;
   cursor: pointer;
 
   &:hover {
@@ -40,8 +56,7 @@
   }
 }
 
-.addNewTask {
-  display: flex;
-  align-items: center;
+.plusIcon{
+margin: 2px 0 0 2px;
 }
 </style>

@@ -3,19 +3,24 @@
   import AddNewTask from './components/AddNewTask.vue'
   import TodoItem from './components/TodoItem.vue'
 
-  const tasks = ref([
-    {id: 1, text: 'to study react', isDone: true},
-    {id: 2, text: 'to study reacNative', isDone: false},
-    {id: 3, text: 'to study Vue', isDone: false},
-  ])
+  const tasks = ref([])
+
+  function addTask(text){
+    tasks.value.unshift({id: tasks.value.length + 1, text, isDone: false})
+  }
 </script>
 
 <template>
   <div class="screenContainer">
     <div class="appContainer">
-      <AddNewTask/>
+      <AddNewTask @addNewTask="addTask"/>
       <div class="tasks">
-        <TodoItem/>
+        <TodoItem 
+          v-for="task in tasks"
+          :key="task.id"
+          :toDoText="task.text"
+          :isDone="task.isDone"
+        />
       </div>
       <div class="doneTasks">done tasks</div>
     </div>

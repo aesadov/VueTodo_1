@@ -1,12 +1,16 @@
 <script setup>
+    import CheckIcon from '../assets/icons/checkIcon.svg'
+    import DelIcon from '../assets/icons/delIcon.svg'
+
+    defineProps(['toDoText', 'isDone'])
 </script>
 
 <template>
   <div class="itemContainer">
-    <p>task to do</p>
+    <p>{{ toDoText }}</p>
     <div class="itemButtons">
-        <p>v</p>
-        <p>del</p>
+        <CheckIcon class="checkIcon"/>
+        <DelIcon/>
     </div>
   </div>
 </template>
@@ -21,7 +25,7 @@
   margin-top: 10px;
   align-items: center;
   color: #9E78CF;
-  padding: 15px;
+  padding: 0 15px;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
 }
@@ -29,8 +33,6 @@
   display: flex;
 }
 .checkIcon {
-  width: 24px;
-  height: 24px;
-  fill: currentColor
+  margin: 3px 10px 0 0;
 }
 </style>
