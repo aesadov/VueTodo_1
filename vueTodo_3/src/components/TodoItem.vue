@@ -7,8 +7,8 @@
 
 <template>
   <div class="itemContainer">
-    <p>{{ toDoText }}</p>
-    <div class="itemButtons">
+    <div :class="{doneTodoTextStyle: isDone}">{{ toDoText }}</div>
+    <div v-if="!isDone" class="itemButtons">
         <Icon icon="mingcute:check-line" class="checkIcon" @click="$emit('isDoneToggle')"/>
         <Icon icon="mingcute:delete-line" class="delIcon" @click="$emit('deleteTask')"/>
     </div>
@@ -28,6 +28,10 @@
   padding: 0 15px;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
+}
+.doneTodoTextStyle {
+  color: #78CFB0;
+  text-decoration: line-through;
 }
 .itemButtons {
   display: flex;
