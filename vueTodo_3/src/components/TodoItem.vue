@@ -1,6 +1,6 @@
 <script setup>
     import { Icon } from "@iconify/vue";
-    defineEmits(['deleteTask'])
+    defineEmits(['deleteTask', 'isDoneToggle'])
 
     defineProps(['toDoText', 'isDone'])
 </script>
@@ -9,7 +9,7 @@
   <div class="itemContainer">
     <p>{{ toDoText }}</p>
     <div class="itemButtons">
-        <Icon icon="mingcute:check-line" class="checkIcon"/>
+        <Icon icon="mingcute:check-line" class="checkIcon" @click="$emit('isDoneToggle')"/>
         <Icon icon="mingcute:delete-line" class="delIcon" @click="$emit('deleteTask')"/>
     </div>
   </div>

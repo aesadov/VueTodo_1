@@ -1,15 +1,19 @@
 <script setup>
-  import {ref} from 'vue'
+  import {ref, computed} from 'vue'
   import AddNewTask from './components/AddNewTask.vue'
   import TodoItem from './components/TodoItem.vue'
 
   const tasks = ref([])
+  const tasksToDo = computed(() => tasks.value.filter(t => !t.isDone))
 
   function addTask(text){
-    tasks.value.unshift({id: tasks.value.length + 1, text, isDone: false})
+    tasks.value.unshift({id: Date.now(), text, isDone: false})
   }
   function removeTask(id){
     tasks.value = tasks.value.filter(t => t.id !== id)
+  }
+  function setTaskIsDone(id) {
+    tasks.value = tasks.value.map(t => t.id === id ? {...t, isDone: true} : t)
   }
 </script>
 
@@ -19,11 +23,12 @@
       <AddNewTask @addNewTask="addTask"/>
       <div class="tasks">
         <TodoItem 
-          v-for="task in tasks"
+          v-for="task in tasksToDo"
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
           @deleteTask="removeTask(task.id)"
+          @isDoneToggle="setTaskIsDone(task.id)"
         />
       </div>
       <div class="doneTasks">done tasks</div>
