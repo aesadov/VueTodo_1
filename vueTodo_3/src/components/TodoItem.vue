@@ -1,6 +1,5 @@
 <script setup>
-    import CheckIcon from '../assets/icons/checkIcon.svg'
-    import DelIcon from '../assets/icons/delIcon.svg'
+    import { Icon } from "@iconify/vue";
 
     defineProps(['toDoText', 'isDone'])
 </script>
@@ -9,8 +8,8 @@
   <div class="itemContainer">
     <p>{{ toDoText }}</p>
     <div class="itemButtons">
-        <CheckIcon class="checkIcon"/>
-        <DelIcon/>
+        <Icon icon="mingcute:check-line" class="checkIcon"/>
+        <Icon icon="mingcute:delete-line" class="delIcon"/>
     </div>
   </div>
 </template>
@@ -31,8 +30,18 @@
 }
 .itemButtons {
   display: flex;
+  cursor: pointer;
+  font-size: 20px;
 }
 .checkIcon {
-  margin: 3px 10px 0 0;
+  margin: 1px 10px 0 0;
+  &:hover{
+    color:#3E1671
+  }
+}
+.delIcon {
+  &:hover{
+    color:#3E1671
+  }
 }
 </style>
