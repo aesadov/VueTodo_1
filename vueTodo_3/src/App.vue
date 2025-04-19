@@ -5,6 +5,7 @@
 
   const tasks = ref([])
   const tasksToDo = computed(() => tasks.value.filter(t => !t.isDone))
+  const doneTasks = computed(()=> tasks.value.filter(t => t.isDone))
 
   function addTask(text){
     tasks.value.unshift({id: Date.now(), text, isDone: false})
@@ -22,6 +23,7 @@
     <div class="appContainer">
       <AddNewTask @addNewTask="addTask"/>
       <div class="tasks">
+        <div class="taskCount">Tasks to do - {{ tasksToDo.length }}</div>
         <TodoItem 
           v-for="task in tasksToDo"
           :key="task.id"
@@ -31,7 +33,17 @@
           @isDoneToggle="setTaskIsDone(task.id)"
         />
       </div>
-      <div class="doneTasks">done tasks</div>
+      <div class="tasks">
+        <div class="taskCount">Done - {{ doneTasks.length }}</div>
+        <TodoItem 
+          v-for="task in doneTasks"
+          :key="task.id"
+          :toDoText="task.text"
+          :isDone="task.isDone"
+          @deleteTask="removeTask(task.id)"
+          @isDoneToggle="setTaskIsDone(task.id)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -50,9 +62,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: aquamarine;
   }
   .tasks {
     width: 100%;
+  }
+  .taskCount {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-top: 60px;
   }
 </style>
