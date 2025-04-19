@@ -8,6 +8,9 @@
   function addTask(text){
     tasks.value.unshift({id: tasks.value.length + 1, text, isDone: false})
   }
+  function removeTask(id){
+    tasks.value = tasks.value.filter(t => t.id !== id)
+  }
 </script>
 
 <template>
@@ -20,6 +23,7 @@
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
+          @deleteTask="removeTask(task.id)"
         />
       </div>
       <div class="doneTasks">done tasks</div>
