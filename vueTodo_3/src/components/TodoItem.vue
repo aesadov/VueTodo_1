@@ -2,6 +2,7 @@
     import { Icon } from "@iconify/vue";
     defineEmits(['deleteTask', 'isDoneToggle'])
 
+    // ⚠️ Добавь валидацию пропсов с типами и значениями по умолчанию
     defineProps(['toDoText', 'isDone'])
 </script>
 
@@ -9,6 +10,7 @@
   <div class="itemContainer">
     <div :class="{doneTodoTextStyle: isDone}">{{ toDoText }}</div>
     <div v-if="!isDone" class="itemButtons">
+      <!-- ⚠️ В будущем используем один способ вывода иконок, но в качестве эксперимента отлично) -->
         <Icon icon="mingcute:check-line" class="checkIcon" @click="$emit('isDoneToggle')"/>
         <Icon icon="mingcute:delete-line" class="delIcon" @click="$emit('deleteTask')"/>
     </div>

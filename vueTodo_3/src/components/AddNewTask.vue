@@ -2,9 +2,11 @@
 import { ref } from 'vue';
 import PlusIcon from '../assets/icons/plus.svg'
 
+// ⚠️ эмиты пишем в kebab-case
 const emit = defineEmits(['addNewTask'])
 
 function submitForm(){
+  <!-- ⚠️ Нет валидации пустого ввода. Добавить проверку: -->
   emit('addNewTask', newTodoText.value)
   newTodoText.value = ''
 }
@@ -14,9 +16,11 @@ const newTodoText = ref('')
 
 <template>
     <form @submit.prevent="submitForm" class="addNewTask">
-      <input 
-        class="input" 
-        type="text" 
+<!--      ⚠️ сначала пишем v-if/v-for/v-model, затем пишем аттрибуты которые помогают понять что за компонент перед нами, например placeholder, -->
+<!--      class, text. Затем остальные пропсы. В самом конце ивенты @click, @submit и т.д.-->
+      <input
+        class="input"
+        type="text"
         id="newTodo"
         placeholder="Add a new task"
         v-model="newTodoText"
