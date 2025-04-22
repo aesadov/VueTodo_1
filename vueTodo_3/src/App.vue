@@ -6,9 +6,11 @@
   const tasks = ref([])
   const tasksToDo = computed(() => tasks.value.filter(t => !t.isDone))
   const doneTasks = ref([])
+  const id = ref(0)
 
-  function addTask(text){
-    tasks.value.unshift({id: Date.now(), text, isDone: false})
+  function addTask(text) {
+      tasks.value.unshift({id: id.value, text, isDone: false})
+      id.value++
   }
   function removeTask(id){
     tasks.value = tasks.value.filter(t => t.id !== id)
