@@ -2,10 +2,10 @@
 import { ref } from 'vue';
 import PlusIcon from '../assets/icons/plus.svg'
 
-const emit = defineEmits(['addNewTask'])
+const emit = defineEmits(['add-new-task'])
 
 function submitForm(){
-  emit('addNewTask', newTodoText.value)
+  emit('add-new-task', newTodoText.value)
   newTodoText.value = ''
 }
 

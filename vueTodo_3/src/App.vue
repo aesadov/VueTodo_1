@@ -23,7 +23,7 @@
 <template>
   <div class="screenContainer">
     <div class="appContainer">
-      <AddNewTask @addNewTask="addTask"/>
+      <AddNewTask @add-new-task="addTask"/>
       <div class="tasks">
         <div v-if="tasksToDo.length" class="taskCount">Tasks to do - {{ tasksToDo.length }}</div>
         <TodoItem 
@@ -31,8 +31,8 @@
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @deleteTask="removeTask(task.id)"
-          @isDoneToggle="setTaskIsDone(task.id)"
+          @delete-task="removeTask(task.id)"
+          @is-done-toggle="setTaskIsDone(task.id)"
         />
       </div>
       <div class="tasks">
@@ -42,8 +42,8 @@
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @deleteTask="removeTask(task.id)"
-          @isDoneToggle="setTaskIsDone(task.id)"
+          @delete-task="removeTask(task.id)"
+          @is-done-toggle="setTaskIsDone(task.id)"
         />
       </div>
     </div>
