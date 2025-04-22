@@ -5,8 +5,12 @@ import PlusIcon from '../assets/icons/plus.svg'
 const emit = defineEmits(['add-new-task'])
 
 function submitForm(){
-  emit('add-new-task', newTodoText.value)
-  newTodoText.value = ''
+  if(newTodoText.value){
+    emit('add-new-task', newTodoText.value)
+    newTodoText.value = ''
+  } else {
+    alert('Please write the text of the task')
+  }
 }
 
 const newTodoText = ref('')
