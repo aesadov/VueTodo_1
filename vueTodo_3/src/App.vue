@@ -5,7 +5,7 @@
 
   const tasks = ref([])
   const tasksToDo = computed(() => tasks.value.filter(t => !t.isDone))
-  const doneTasks = ref([])
+  const doneTasks = computed(() => tasks.value.filter(t => t.isDone))
   const id = ref(0)
 
   function addTask(text) {
@@ -16,9 +16,6 @@
     tasks.value = tasks.value.filter(t => t.id !== id)
   }
   function setTaskIsDone(id) {
-    const doneTask = tasks.value.find(t => t.id === id)
-    doneTasks.value.unshift({...doneTask, isDone: true})
-
     tasks.value = tasks.value.map(t => t.id === id ? {...t, isDone: true} : t)
   }
 </script>
