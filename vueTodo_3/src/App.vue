@@ -21,11 +21,11 @@
 </script>
 
 <template>
-  <div class="screenContainer">
-    <div class="appContainer">
+  <div class="todo-app">
+    <div class="todo-app__container">
       <AddNewTask @add-new-task="addTask"/>
-      <div class="tasks">
-        <div v-if="tasksToDo.length" class="taskCount">Tasks to do - {{ tasksToDo.length }}</div>
+      <div class="todo-app__section">
+        <div v-if="tasksToDo.length" class="todo-app__counter">Tasks to do - {{ tasksToDo.length }}</div>
         <TodoItem 
           v-for="task in tasksToDo"
           :key="task.id"
@@ -35,8 +35,8 @@
           @is-done-toggle="setTaskIsDone(task.id)"
         />
       </div>
-      <div class="tasks">
-        <div v-if="doneTasks.length" class="taskCount">Done - {{ doneTasks.length }}</div>
+      <div class="todo-app__section">
+        <div v-if="doneTasks.length" class="todo-app__counter">Done - {{ doneTasks.length }}</div>
         <TodoItem 
           v-for="task in doneTasks"
           :key="task.id"
@@ -51,26 +51,35 @@
 </template>
 
 <style lang="scss" scoped>
-  .screenContainer {
+  .todo-app {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #0d0714;
     color: #f0f8ff;
-  }
-  .appContainer {
-    width: 432px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .tasks {
-    width: 100%;
-  }
-  .taskCount {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    margin-top: 60px;
+
+    &__container {
+      width: 432px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    &__section {
+      width: 100%;
+      margin-bottom: 30px;
+
+        &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__counter {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      margin: 20px 0 15px;
+    }
   }
 </style>

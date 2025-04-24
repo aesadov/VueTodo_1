@@ -17,50 +17,57 @@ const newTodoText = ref('')
 </script>
 
 <template>
-    <form @submit.prevent="submitForm" class="addNewTask">
+    <form class="task-form" @submit.prevent="submitForm" >
       <input 
-        class="input" 
+        v-model="newTodoText"
+        placeholder="Add a new task"
+        class="task-form__input" 
         type="text" 
         id="newTodo"
-        placeholder="Add a new task"
-        v-model="newTodoText"
       >
-      <button class="button"><PlusIcon class="plusIcon"/></button>
+      <button class="task-form__submit">
+        <PlusIcon class="task-form__icon"/>
+      </button>
     </form>
 </template>
 
 <style scoped lang="scss">
-.addNewTask {
+.task-form {
   display: flex;
   align-items: center;
-}
 
-.input {
-  background-color: #0d0714;
-  border: 1px solid #3E1671;
-  border-radius: 10px;
-  width: 351px;
-  height: 40px;
-  padding: 0 12px;
-  font-size: 16px;
-  color: #f0f8ff;
-}
+  &__input {
+    background-color: #0d0714;
+    border: 1px solid #3E1671;
+    border-radius: 10px;
+    width: 351px;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 16px;
+    color: #f0f8ff;
 
-.button {
-  width: 40px;
-  height: 40px;
-  background-color: #9E78CF;
-  border-radius: 10px;
-  margin-left: 10px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #3E1671;
+    &:focus {
+      outline: none;
+      border-color: #9E78CF;
+    }
   }
-}
 
-.plusIcon{
-margin: 2px 0 0 2px;
+  &__submit {
+    width: 40px;
+    height: 40px;
+    background-color: #9E78CF;
+    border-radius: 10px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #3E1671;
+    }
+  }
+
+  &__icon {
+    margin: 3px 0 0 1px;
+  }
 }
 </style>
