@@ -2,7 +2,18 @@
     import { Icon } from "@iconify/vue";
     defineEmits(['delete-task', 'is-done-toggle'])
 
-    defineProps(['toDoText', 'isDone'])
+    defineProps({
+      toDoText: {
+        type: String,
+        required: true,
+        validator: value => value.trim().lenght > 0
+      },
+      isDone: {
+        type: Boolean,
+        required: true,
+        default: false
+      }
+    })
 </script>
 
 <template>
