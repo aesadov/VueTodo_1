@@ -6,7 +6,7 @@ declare module '*.vue' {
   export default component
 }
 
-declare module '*.svg' {
+declare module '*.svg?component' {
   import { FunctionalComponent, SVGAttributes } from 'vue'
   const src: FunctionalComponent<SVGAttributes>
   export default src
