@@ -2,8 +2,11 @@
 import { ref } from 'vue'
 import PlusIcon from '../assets/icons/plus.svg'
 
+interface AddNewTask {
+  (e: 'add-new-task', value: string): void
+}
 
-const emit = defineEmits(['add-new-task'])
+const emit = defineEmits<AddNewTask>()
 
 function submitForm(){
   if(newTodoText.value.trim()){
