@@ -1,6 +1,7 @@
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue'
 import PlusIcon from '../assets/icons/plus.svg'
+
 
 const emit = defineEmits(['add-new-task'])
 
