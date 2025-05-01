@@ -1,19 +1,22 @@
-<script setup>
-    import { Icon } from "@iconify/vue";
-    defineEmits(['delete-task', 'is-done-toggle'])
+<script setup lang='ts'>
+import { Icon } from "@iconify/vue";
 
-    defineProps({
-      toDoText: {
-        type: String,
-        required: true,
-        validator: value => value.trim().lenght > 0
-      },
-      isDone: {
-        type: Boolean,
-        required: true,
-        default: false
-      }
-    })
+interface Props {
+  toDoText: string
+  isDone: boolean
+}
+
+interface Emits {
+  (e: 'delete-task'): void
+  (e: 'is-done-toggle'): void
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isDone: false
+})
+
+const emit = defineEmits<Emits>()
+
 </script>
 
 <template>
