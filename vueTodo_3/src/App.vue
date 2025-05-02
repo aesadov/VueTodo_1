@@ -1,35 +1,17 @@
 <script setup lang='ts'>
-  import {ref, computed} from 'vue'
   import AddNewTask from './components/AddNewTask.vue'
   import TodoItem from './components/TodoItem.vue'
+  import {useTasksStore} from './stores/tasks'
+  import { storeToRefs } from 'pinia'
 
-  interface TaskType {
-    id: number
-    text: string
-    isDone: boolean
-  }
-
-  const tasks = ref<TaskType[]>([])
-  const tasksToDo = computed(() => tasks.value.filter(t => !t.isDone))
-  const doneTasks = computed(() => tasks.value.filter(t => t.isDone))
-  const id = ref<number>(0)
-
-  function addTask(text: string) {
-      tasks.value.unshift({id: id.value, text, isDone: false})
-      id.value++
-  }
-  function removeTask(id: number){
-    tasks.value = tasks.value.filter(t => t.id !== id)
-  }
-  function setTaskIsDone(id: number) {
-    tasks.value = tasks.value.map(t => t.id === id ? {...t, isDone: true} : t)
-  }
+  const tasksStore = useTasksStore()
+  const {tasksToDo, doneTasks} = storeToRefs(useTasksStore())
 </script>
 
 <template>
   <div class="todo-app">
     <div class="todo-app__container">
-      <AddNewTask @add-new-task="addTask"/>
+      <AddNewTask @add-new-task="tasksStore.addTask"/>
       <div class="todo-app__section">
         <div v-if="tasksToDo.length" class="todo-app__counter">Tasks to do - {{ tasksToDo.length }}</div>
         <TodoItem 
@@ -37,8 +19,8 @@
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @delete-task="removeTask(task.id)"
-          @is-done-toggle="setTaskIsDone(task.id)"
+          @delete-task="tasksStore.removeTask(task.id)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
         />
       </div>
       <div class="todo-app__section">
@@ -48,8 +30,8 @@
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @delete-task="removeTask(task.id)"
-          @is-done-toggle="setTaskIsDone(task.id)"
+          @delete-task="tasksStore.removeTask(task.id)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
         />
       </div>
     </div>
