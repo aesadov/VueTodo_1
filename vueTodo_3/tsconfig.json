@@ -2,7 +2,9 @@
   "compilerOptions": {
     "types": ["vite/client"],
     "module": "ESNext",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "lib": ["ES2015", "DOM"],
+    "target": "ES6",
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "exclude": ["node_modules"]

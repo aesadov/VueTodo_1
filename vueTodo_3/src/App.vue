@@ -1,11 +1,16 @@
 <script setup lang='ts'>
-  import AddNewTask from './components/AddNewTask.vue'
+  import { onBeforeMount } from 'vue'
+import AddNewTask from './components/AddNewTask.vue'
   import TodoItem from './components/TodoItem.vue'
   import {useTasksStore} from './stores/tasks'
   import { storeToRefs } from 'pinia'
 
   const tasksStore = useTasksStore()
-  const {tasksToDo, doneTasks} = storeToRefs(useTasksStore())
+  const {dummyTasks, tasksToDo, doneTasks} = storeToRefs(useTasksStore())
+
+  onBeforeMount (()=>{
+    tasksStore.fetchTasks()
+  })
 </script>
 
 <template>
@@ -27,6 +32,17 @@
         <div v-if="doneTasks.length" class="todo-app__counter">Done - {{ doneTasks.length }}</div>
         <TodoItem 
           v-for="task in doneTasks"
+          :key="task.id"
+          :toDoText="task.text"
+          :isDone="task.isDone"
+          @delete-task="tasksStore.removeTask(task.id)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
+        />
+      </div>
+      <div class="todo-app__section">
+        <div v-if="dummyTasks.length" class="todo-app__counter">DummyTasks - {{ dummyTasks.length }}</div>
+        <TodoItem 
+          v-for="task in dummyTasks"
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
