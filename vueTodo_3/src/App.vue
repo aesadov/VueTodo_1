@@ -24,8 +24,8 @@ import AddNewTask from './components/AddNewTask.vue'
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @delete-task="tasksStore.removeTask(task.id)"
-          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
+          @delete-task="tasksStore.removeTask(task.id, false)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id, false)"
         />
       </div>
       <div class="todo-app__section">
@@ -35,8 +35,8 @@ import AddNewTask from './components/AddNewTask.vue'
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @delete-task="tasksStore.removeTask(task.id)"
-          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
+          @delete-task="tasksStore.removeTask(task.id, false)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id, false)"
         />
       </div>
       <div class="todo-app__section">
@@ -46,8 +46,8 @@ import AddNewTask from './components/AddNewTask.vue'
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @delete-task="tasksStore.removeTask(task.id)"
-          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
+          @delete-task="tasksStore.removeTask(task.id, true)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id, true)"
         />
       </div>
     </div>
