@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import PlusIcon from '../assets/icons/plus.svg'
+import { useInputValidation } from '../composables/useInputValidation'
 
 interface AddNewTask {
   (e: 'add-new-task', value: string): void
@@ -8,16 +8,17 @@ interface AddNewTask {
 
 const emit = defineEmits<AddNewTask>()
 
-function submitForm(){
-  if(newTodoText.value.trim()){
+const { value: newTodoText, errorMessage, markAsTouched } = useInputValidation()
+
+function submitForm() {
+  markAsTouched()
+  if (!errorMessage.value) {
     emit('add-new-task', newTodoText.value.trim())
     newTodoText.value = ''
   } else {
-    alert('Please write the text of the task')
+    alert(errorMessage.value)
   }
 }
-
-const newTodoText = ref('')
 </script>
 
 <template>
