@@ -1,12 +1,12 @@
 <script setup lang='ts'>
   import { onBeforeMount } from 'vue'
-import AddNewTask from './components/AddNewTask.vue'
+  import AddNewTask from './components/AddNewTask.vue'
   import TodoItem from './components/TodoItem.vue'
   import {useTasksStore} from './stores/tasks'
   import { storeToRefs } from 'pinia'
 
   const tasksStore = useTasksStore()
-  const {dummyTasks, tasksToDo, doneTasks} = storeToRefs(useTasksStore())
+  const {tasksToDo, doneTasks} = storeToRefs(useTasksStore())
 
   onBeforeMount (()=>{
     tasksStore.fetchTasks()
@@ -24,8 +24,8 @@ import AddNewTask from './components/AddNewTask.vue'
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @delete-task="tasksStore.removeTask(task.id, false)"
-          @is-done-toggle="tasksStore.setTaskIsDone(task.id, false)"
+          @delete-task="tasksStore.removeTask(task.id)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
         />
       </div>
       <div class="todo-app__section">
@@ -35,19 +35,8 @@ import AddNewTask from './components/AddNewTask.vue'
           :key="task.id"
           :toDoText="task.text"
           :isDone="task.isDone"
-          @delete-task="tasksStore.removeTask(task.id, false)"
-          @is-done-toggle="tasksStore.setTaskIsDone(task.id, false)"
-        />
-      </div>
-      <div class="todo-app__section">
-        <div v-if="dummyTasks.length" class="todo-app__counter">DummyTasks - {{ dummyTasks.length }}</div>
-        <TodoItem 
-          v-for="task in dummyTasks"
-          :key="task.id"
-          :toDoText="task.text"
-          :isDone="task.isDone"
-          @delete-task="tasksStore.removeTask(task.id, true)"
-          @is-done-toggle="tasksStore.setTaskIsDone(task.id, true)"
+          @delete-task="tasksStore.removeTask(task.id)"
+          @is-done-toggle="tasksStore.setTaskIsDone(task.id)"
         />
       </div>
     </div>

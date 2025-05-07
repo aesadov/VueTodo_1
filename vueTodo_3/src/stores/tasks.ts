@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import {ref, computed} from 'vue'
 
-interface TaskType {
-  id: number
+interface Todo {
+  id: string
   text: string
   isDone: boolean
 }
@@ -23,8 +23,7 @@ interface ApiResponse {
 
 export const useTasksStore = defineStore('tasks', () => {
 
-    const dummyTasks = ref<TaskType[]>([])
-    const tasks = ref<TaskType[]>([])
+    const tasks = ref<Todo[]>([])
     const tasksToDo = computed(() => tasks.value.filter(t => !t.isDone))
     const doneTasks = computed(() => tasks.value.filter(t => t.isDone))
     const id = ref<number>(0)
@@ -38,40 +37,32 @@ export const useTasksStore = defineStore('tasks', () => {
         }
           
         const data: ApiResponse = await response.json()
-        const todos = data.todos
+        const todos = data.todos.map(t => ({
+            id: t.id.toString() + '_d',
+            text: t.todo,
+            isDone: t.completed
+          })
+        )
         
-        dummyTasks.value = todos.map(t => ({
-          id: t.id,
-          text: t.todo,
-          isDone: t.completed
-        }))
+        tasks.value = tasks.value.concat(todos)
           
       } catch (error) {
         console.error('Ошибка при загрузке задач:', error)
-    }}
+      }
+    }
     
     function addTask(text: string) {
-      tasks.value.unshift({id: id.value, text, isDone: false})
+      tasks.value.unshift({id: id.value.toString(), text, isDone: false})
       id.value++
     }
 
-    function removeTask(id: number, isDummy: boolean){
-     
-      if (isDummy) {
-        dummyTasks.value = dummyTasks.value.filter(t => t.id !== id) 
-      } else { 
+    function removeTask(id: string){
         tasks.value = tasks.value.filter(t => t.id !== id)
-      }
     }
 
-    function setTaskIsDone(id: number, isDummy: boolean) {
-      
-      if (isDummy) {
-        dummyTasks.value = dummyTasks.value.map(t => t.id === id ? {...t, isDone: true} : t)
-      } else { 
+    function setTaskIsDone(id: string) {
         tasks.value = tasks.value.map(t => t.id === id ? {...t, isDone: true} : t)
-      }
     }
     
-    return {dummyTasks, tasksToDo, doneTasks, addTask, removeTask, setTaskIsDone, fetchTasks}
+  return {tasksToDo, doneTasks, addTask, removeTask, setTaskIsDone, fetchTasks}
 })
